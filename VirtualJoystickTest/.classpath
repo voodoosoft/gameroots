@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="lib" path="/GameLib/lib/gdx.jar" sourcepath="/GameLib/lib-src/gdx-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/GameLib/lib/gdx-backend-android.jar" sourcepath="/GameLib/lib-src/gdx-backend-android-sources.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/gameroots-client-libgdx"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
