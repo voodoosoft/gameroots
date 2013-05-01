@@ -5,5 +5,13 @@
 
 # Names should be added to this file as
 #	Name or Organization <email address>
-
 Stefan Wischnewski <sw@voodoosoft.de>
+
+
+# Some parts of gameroots was derived from libgdx.
+#
+# This is the official list of the AUTHORS of libgdx
+# for copyright purposes.
+#
+Mario Zechner <badlogicgames@gmail.com>
+Nathan Sweet <nathan.sweet@gmail.com> 
