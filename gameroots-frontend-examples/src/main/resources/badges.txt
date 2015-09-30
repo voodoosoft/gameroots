@@ -1,0 +1,32 @@
+badges.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+a1
+  rotate: false
+  xy: 2, 2
+  size: 78, 79
+  orig: 256, 256
+  offset: 90, 88
+  index: -1
+a2
+  rotate: false
+  xy: 82, 2
+  size: 78, 79
+  orig: 256, 256
+  offset: 90, 88
+  index: -1
+a3
+  rotate: false
+  xy: 162, 2
+  size: 78, 79
+  orig: 256, 256
+  offset: 90, 88
+  index: -1
+a4
+  rotate: false
+  xy: 242, 2
+  size: 78, 79
+  orig: 256, 256
+  offset: 90, 88
+  index: -1
