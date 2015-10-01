@@ -16,12 +16,6 @@ It is no longer necessary to provide an open `SpriteBatch` to each render class.
 There are default implementations for rendering textures, particles and vertices.
 The first sort criterium is always the layer (z-index) followed by individual criteria like texture handle or blend mode.
 
-###Module and Packages:
-
-gameroots-frontend-libgdx
-
-`de.voodoosoft.gameroots.frontend.gdx.view.render.batch`
-
 ###Examples:
 
 gameroots-frontend-examples
@@ -56,3 +50,9 @@ private void render(BatchRenderQueue renderQueue, SpriteBatch batch) {
 		renderQueue.render(batch, time);
 		batch.end();
 ```
+
+###Module and Packages:
+
+gameroots-frontend-libgdx
+
+`de.voodoosoft.gameroots.frontend.gdx.view.render.batch`
