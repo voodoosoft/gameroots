@@ -17,6 +17,7 @@ There are default implementations for rendering textures, particles and vertices
 The first sort criterium is always the layer (z-index) followed by individual criteria like texture handle or blend mode.
 
 ###Examples:
+Run `BatchQueueLauncher` to get a first impression.
 
 Create a render queue for texture items:
 ```
@@ -47,9 +48,9 @@ private void render(BatchRenderQueue renderQueue, SpriteBatch batch) {
 		batch.end();
 ```
 
-###Module and Packages:
-gameroots-frontend-libgdx:
+###Modules and Packages:
+**gameroots-frontend-libgdx:**  
 `de.voodoosoft.gameroots.frontend.gdx.view.render.batch`
 
-gameroots-frontend-examples:
+**gameroots-frontend-examples:**  
 `de.voodoosoft.gameroots.examples.batch`
