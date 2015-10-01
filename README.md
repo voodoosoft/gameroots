@@ -18,10 +18,6 @@ The first sort criterium is always the layer (z-index) followed by individual cr
 
 ###Examples:
 
-gameroots-frontend-examples
-
-`de.voodoosoft.gameroots.examples.batch`
-
 Create a render queue for texture items:
 ```
 		renderQueue = new BatchRenderQueue(MAX_LAYERS);
@@ -52,7 +48,8 @@ private void render(BatchRenderQueue renderQueue, SpriteBatch batch) {
 ```
 
 ###Module and Packages:
-
-gameroots-frontend-libgdx
-
+gameroots-frontend-libgdx:
 `de.voodoosoft.gameroots.frontend.gdx.view.render.batch`
+
+gameroots-frontend-examples:
+`de.voodoosoft.gameroots.examples.batch`
