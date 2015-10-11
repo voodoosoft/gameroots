@@ -27,7 +27,7 @@ public class ParticleBatchItem extends AbstractBatchItem implements Pool.Poolabl
 	 */
 	@Override
 	public void reset() {
-		setBlendMode(BlendMode.DEFAULT);
+		setBlendMode(DefaultBlendMode.DEFAULT);
 	}
 
 	public void setParticleDefinition(ParticleDefinition particleDefinition) {
@@ -48,6 +48,17 @@ public class ParticleBatchItem extends AbstractBatchItem implements Pool.Poolabl
 		if (getLastShaderProgram() != null) {
 			batch.setShader(null);
 			setLastShaderProgram(null);
+		}
+
+		if (isBlending()) {
+			batch.enableBlending();
+			BlendMode blendMode = getBlendMode();
+			if (!blendMode.equals(DefaultBlendMode.NONE)) {
+				batch.setBlendFunction(blendMode.getSrcFunction(), blendMode.getDestFunction());
+			}
+		}
+		else {
+			batch.disableBlending();
 		}
 
 		float ex = particleDefinition.getEmitterX();

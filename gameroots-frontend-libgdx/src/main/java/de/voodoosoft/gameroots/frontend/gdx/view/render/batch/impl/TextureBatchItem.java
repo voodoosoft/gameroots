@@ -1,7 +1,6 @@
 package de.voodoosoft.gameroots.frontend.gdx.view.render.batch.impl;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Pool;
@@ -19,7 +18,7 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		width = -1;
 		height = -1;
 		rotation = 0;
-		setBlendMode(BlendMode.DEFAULT);
+		setBlendMode(DefaultBlendMode.DEFAULT);
 	}
 
 	public TextureBatchItem(int layer) {
@@ -27,7 +26,7 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		width = -1;
 		height = -1;
 		rotation = 0;
-		setBlendMode(BlendMode.DEFAULT);
+		setBlendMode(DefaultBlendMode.DEFAULT);
 	}
 
 	/**
@@ -39,7 +38,7 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		width = -1;
 		height = -1;
 		rotation = 0;
-		setBlendMode(BlendMode.DEFAULT);
+		setBlendMode(DefaultBlendMode.DEFAULT);
 	}
 
 	public void setLocation(float x, float y) {
@@ -78,14 +77,8 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		if (isBlending()) {
 			batch.enableBlending();
 			BlendMode blendMode = getBlendMode();
-			if (blendMode == BlendMode.DEFAULT) {
-				batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-			}
-			else if (blendMode == BlendMode.ALPHA) {
-				batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
-			}
-			else if (blendMode == BlendMode.ADDITIVE) {
-				batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE);
+			if (!blendMode.equals(DefaultBlendMode.NONE)) {
+				batch.setBlendFunction(blendMode.getSrcFunction(), blendMode.getDestFunction());
 			}
 		}
 		else {

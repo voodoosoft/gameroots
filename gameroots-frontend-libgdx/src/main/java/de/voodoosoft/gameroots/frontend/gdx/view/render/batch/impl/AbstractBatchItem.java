@@ -49,7 +49,7 @@ public abstract class AbstractBatchItem implements BatchRenderItem {
 
 	public void setBlendMode(BlendMode blendMode) {
 		this.blendMode = blendMode;
-		this.blending = blendMode != BlendMode.NONE;
+		this.blending = blendMode != DefaultBlendMode.NONE;
 	}
 
 	public boolean isBlending() {
@@ -64,17 +64,6 @@ public abstract class AbstractBatchItem implements BatchRenderItem {
 		AbstractBatchItem.lastShaderProgram = lastShaderProgram;
 	}
 
-	protected boolean nullSafeEquals(Object o1, Object o2) {
-		if (o1 == o2) {
-			return true;
-		}
-		if (o1 == null || o2 == null) {
-			return false;
-		}
-
-		return o1.equals(o2);
-	}
-
 	@Override
 	public int compareTo(BatchRenderItem otherItem) {
 		int result = 0;
@@ -84,7 +73,7 @@ public abstract class AbstractBatchItem implements BatchRenderItem {
 			if (result == 0) {
 				result = Integer.compare(this.getLayer(), other.layer);
 				if (result == 0) {
-					result = this.getBlendMode().compareTo(other.blendMode);
+					result = this.getBlendMode().compareTo(other.getBlendMode());
 				}
 			}
 		}

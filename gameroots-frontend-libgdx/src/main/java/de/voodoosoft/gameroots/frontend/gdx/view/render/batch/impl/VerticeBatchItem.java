@@ -1,6 +1,5 @@
 package de.voodoosoft.gameroots.frontend.gdx.view.render.batch.impl;
 
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -9,6 +8,7 @@ import de.voodoosoft.gameroots.frontend.gdx.view.render.batch.BlendMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 
@@ -56,21 +56,15 @@ public class VerticeBatchItem extends AbstractBatchItem implements Pool.Poolable
 
 	@Override
 	public void render(SpriteBatch batch, long time) {
-		if (!nullSafeEquals(getLastShaderProgram(), shaderProgram)) {
+		if (!Objects.equals(getLastShaderProgram(), shaderProgram)) {
 			batch.setShader(shaderProgram);
 			setLastShaderProgram(shaderProgram);
 		}
 
 		if (isBlending()) {
 			BlendMode blendMode = getBlendMode();
-			if (blendMode == BlendMode.DEFAULT) {
-				batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-			}
-			if (blendMode == BlendMode.ALPHA) {
-				batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
-			}
-			else if (blendMode == BlendMode.ADDITIVE) {
-				batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE);
+			if (!blendMode.equals(DefaultBlendMode.NONE)) {
+				batch.setBlendFunction(blendMode.getSrcFunction(), blendMode.getDestFunction());
 			}
 			batch.enableBlending();
 		}
