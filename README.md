@@ -15,6 +15,7 @@ It is no longer necessary to provide an open `SpriteBatch` to each render class.
 
 There are default implementations for rendering textures, particles and vertices. In case they don't meet your needs, just derive your own item classes from `BatchRenderItem`.
 The first sort criterium is always the layer (z-index) followed by individual criteria like texture handle or blend mode.
+In case the layer is the only relevant criterium, no actual sorting is performed for rendering because items are always presorted by layer when they are added to the render queue.
 
 ###Examples:
 Run `BatchQueueLauncher` to get a first impression.
