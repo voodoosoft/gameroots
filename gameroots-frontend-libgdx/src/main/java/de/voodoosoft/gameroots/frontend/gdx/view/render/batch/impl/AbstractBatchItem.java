@@ -31,18 +31,6 @@ public abstract class AbstractBatchItem implements BatchRenderItem {
 		this.layer = layer;
 	}
 
-	/**
-	 * Returns true if this item should be rendered after general scene lighting was applied.
-	 * @return
-	 */
-	public boolean isPostLighting() {
-		return postLighting;
-	}
-
-	public void setPostLighting(boolean postLighting) {
-		this.postLighting = postLighting;
-	}
-
 	public BlendMode getBlendMode() {
 		return blendMode;
 	}
@@ -69,13 +57,7 @@ public abstract class AbstractBatchItem implements BatchRenderItem {
 		int result = 0;
 		if (otherItem instanceof AbstractBatchItem) {
 			AbstractBatchItem other = (AbstractBatchItem)otherItem;
-			result = Boolean.compare(this.isPostLighting(), other.postLighting);
-			if (result == 0) {
-				result = Integer.compare(this.getLayer(), other.layer);
-				if (result == 0) {
-					result = this.getBlendMode().compareTo(other.getBlendMode());
-				}
-			}
+			result = this.blendMode.compareTo(other.blendMode);
 		}
 
 		return result;
@@ -83,7 +65,6 @@ public abstract class AbstractBatchItem implements BatchRenderItem {
 
 	private BlendMode blendMode;
 	private int layer;
-	private boolean postLighting;
 	private boolean blending;
 	private static ShaderProgram lastShaderProgram;
 }
