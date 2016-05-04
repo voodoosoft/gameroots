@@ -87,6 +87,7 @@ public class BatchRenderQueue {
 		BatchRenderItem[] items = itemLayers.get(layer);
 		if (itemCount[layer] == items.length) {
 			items = Arrays.copyOf(items, items.length * 2);
+			itemLayers.set(layer, items);
 		}
 		int i = itemCount[layer]++;
 		items[i] = item;
