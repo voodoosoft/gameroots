@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Pool;
 import de.voodoosoft.gameroots.frontend.gdx.view.render.batch.BatchRenderItem;
 import de.voodoosoft.gameroots.frontend.gdx.view.render.batch.BlendMode;
-import de.voodoosoft.gameroots.frontend.gdx.view.render.batch.ParticleDefinition;
 
 
 
@@ -14,7 +13,7 @@ import de.voodoosoft.gameroots.frontend.gdx.view.render.batch.ParticleDefinition
  * <p/>
  * As batch items are pooled and reused,
  * the concrete particle definition to be used for rendering is assigned during each render cycle on the fly
- * by calling  {@link #setParticleDefinition}.
+ * by calling  {@link #setParticleDef}.
  * <p/>
  *
  */
@@ -30,12 +29,12 @@ public class ParticleBatchItem extends AbstractBatchItem implements Pool.Poolabl
 		setBlendMode(DefaultBlendMode.DEFAULT);
 	}
 
-	public void setParticleDefinition(ParticleDefinition particleDefinition) {
-		this.particleDefinition = particleDefinition;
+	public void setParticleDef(ParticleDef particleDef) {
+		this.particleDef = particleDef;
 	}
 
-	public ParticleDefinition getParticleDefinition() {
-		return particleDefinition;
+	public ParticleDef getParticleDef() {
+		return particleDef;
 	}
 
 	public void setOffsets(float xOffset, float yOffset) {
@@ -61,22 +60,22 @@ public class ParticleBatchItem extends AbstractBatchItem implements Pool.Poolabl
 			batch.disableBlending();
 		}
 
-		float ex = particleDefinition.getEmitterX();
-		float ey = particleDefinition.getEmitterY();
+		float ex = particleDef.getEmitterX();
+		float ey = particleDef.getEmitterY();
 
-		ParticleEffect effect = particleDefinition.getEffect();
+		ParticleEffect effect = particleDef.getEffect();
 		float x = ex - xOffset;
 		float y = ey - yOffset;
 		effect.setPosition(x, y);
 
-		if (particleDefinition.getLastUpateTime() == 0) {
-			particleDefinition.setLastUpdateTime(time);
+		if (particleDef.getLastUpateTime() == 0) {
+			particleDef.setLastUpdateTime(time);
 		}
 
-		long dns = time - particleDefinition.getLastUpateTime();
-		boolean doUpdate = dns >= particleDefinition.getUpdateInterval();
+		long dns = time - particleDef.getLastUpateTime();
+		boolean doUpdate = dns >= particleDef.getUpdateInterval();
 		if (doUpdate) {
-			particleDefinition.setLastUpdateTime(time);
+			particleDef.setLastUpdateTime(time);
 			float ds = (float)dns / (float)SECS_AS_NANO;
 			effect.draw(batch, ds);
 		}
@@ -85,7 +84,7 @@ public class ParticleBatchItem extends AbstractBatchItem implements Pool.Poolabl
 		}
 
 		if (doUpdate && effect.isComplete()) {
-			particleDefinition.setRemove(true);
+			particleDef.setRemove(true);
 		}
 	}
 
@@ -95,7 +94,7 @@ public class ParticleBatchItem extends AbstractBatchItem implements Pool.Poolabl
 		if (result == 0) {
 			if (otherItem instanceof ParticleBatchItem) {
 				ParticleBatchItem o = (ParticleBatchItem)otherItem;
-				result = Integer.compare(this.particleDefinition.getSharedTextureHandle(), o.getParticleDefinition().getSharedTextureHandle());
+				result = Integer.compare(this.particleDef.getSharedTextureHandle(), o.getParticleDef().getSharedTextureHandle());
 			}
 		}
 
@@ -105,6 +104,6 @@ public class ParticleBatchItem extends AbstractBatchItem implements Pool.Poolabl
 	private final static long MILLIS_AS_NANO = 1000000l;
 	private final static long SECS_AS_NANO = MILLIS_AS_NANO * 1000l;
 
-	private ParticleDefinition particleDefinition;
+	private ParticleDef particleDef;
 	private float xOffset, yOffset;
 }

@@ -1,8 +1,9 @@
-package de.voodoosoft.gameroots.frontend.gdx.view.render.batch;
+package de.voodoosoft.gameroots.frontend.gdx.view.render.batch.impl;
 
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool.PooledEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 
@@ -10,7 +11,7 @@ import com.badlogic.gdx.utils.Array;
 /**
  * Specifies a particle type.
  */
-public class ParticleDefinition {
+public class ParticleDef {
 
 	/**
 	 * Creates a new <code>ParticleDefinition</code>.
@@ -21,7 +22,7 @@ public class ParticleDefinition {
 	 * @param emitterY particle y-coordinate
 	 * @param updateInterval time span in ns between each particle update
 	 */
-	public ParticleDefinition(Enum type, PooledEffect effect, float emitterX, float emitterY, long updateInterval) {
+	public ParticleDef(Enum type, PooledEffect effect, float emitterX, float emitterY, long updateInterval) {
 		this.type = type;
 		this.effect = effect;
 		this.emitterX = emitterX;
@@ -136,7 +137,7 @@ public class ParticleDefinition {
 	}
 
 	/**
-	 * Specifies whether this particle effect should be rendered after scene lighting was applied.
+	 * Specifies whether this particle effect should be rendered after stage lighting was applied.
 	 * @param postLighting
 	 */
 	public void setPostLighting(boolean postLighting) {
@@ -144,7 +145,7 @@ public class ParticleDefinition {
 	}
 
 	/**
-	 * Returns true when this particle effect should be rendered after scene lighting was applied.
+	 * Returns true when this particle effect should be rendered after stage lighting was applied.
 	 * @return
 	 */
 	public boolean isPostLighting() {
@@ -155,6 +156,14 @@ public class ParticleDefinition {
 		return sharedTextureHandle;
 	}
 
+	public Vector2 getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(Vector2 velocity) {
+		this.velocity = velocity;
+	}
+
 	@Override
 	public String toString() {
 		return type + " particles @" + hashCode();
@@ -163,6 +172,7 @@ public class ParticleDefinition {
 	private PooledEffect effect;
 	private float emitterX;
 	private float emitterY;
+	private Vector2 velocity;
 	private long lastUpdateTime;
 	private long updateInterval;
 	private Enum type;

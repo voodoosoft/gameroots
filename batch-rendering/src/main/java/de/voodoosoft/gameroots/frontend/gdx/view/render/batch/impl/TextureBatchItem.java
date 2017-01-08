@@ -18,6 +18,8 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		width = -1;
 		height = -1;
 		rotation = 0;
+		xOrigin = -1;
+		yOrigin = -1;
 		setBlendMode(DefaultBlendMode.DEFAULT);
 	}
 
@@ -26,6 +28,8 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		width = -1;
 		height = -1;
 		rotation = 0;
+		xOrigin = -1;
+		yOrigin = -1;
 		setBlendMode(DefaultBlendMode.DEFAULT);
 	}
 
@@ -38,6 +42,8 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		width = -1;
 		height = -1;
 		rotation = 0;
+		xOrigin = -1;
+		yOrigin = -1;
 		setBlendMode(DefaultBlendMode.DEFAULT);
 	}
 
@@ -46,9 +52,27 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		this.y = y;
 	}
 
+	public void shift(float dx, float dy) {
+		this.x += dx;
+		this.y += dy;
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
 	public void setDimension(float width, float height) {
 		this.width = width;
 		this.height = height;
+	}
+
+	public void setOrigin(float xOrigin, float yOrigin) {
+		this.xOrigin = xOrigin;
+		this.yOrigin = yOrigin;
 	}
 
 	public void setRotation(float rotation) {
@@ -92,7 +116,13 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		}
 
 		if (rotation != 0) {
-			batch.draw(textureRegion, x, y, width/2, height/2, width, height, 1, 1, rotation);
+			if (xOrigin != -1 && yOrigin != -1) {
+				batch.draw(textureRegion, x, y, xOrigin, yOrigin, width, height, 1, 1, rotation);
+			} else {
+				float w = width != -1 ? width : textureRegion.getRegionWidth();
+				float h = height != -1 ? height : textureRegion.getRegionHeight();
+				batch.draw(textureRegion, x, y, w / 2f, h / 2f, w, h, 1, 1, rotation);
+			}
 		}
 		else {
 			if (width == -1 || height == -1) {
@@ -122,6 +152,7 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 	private Color color;
 	private float x, y;
 	private float width, height;
+	private float xOrigin, yOrigin;
 	private TextureRegion textureRegion;
 	private float rotation;
 }

@@ -1,0 +1,3 @@
+rootProject.name = 'gameroots'
+include 'tweening', 'batch-rendering', 'examples', 'virtual-joystick'
+

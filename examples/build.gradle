@@ -1,0 +1,22 @@
+group 'de.voodoosoft.gameroots'
+version '1.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    gdxVersion = '1.9.5'
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    compile fileTree(dir: "../batch-rendering/build/libs", include: 'batch-rendering-1.0.jar')
+    compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+    runtime "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+}

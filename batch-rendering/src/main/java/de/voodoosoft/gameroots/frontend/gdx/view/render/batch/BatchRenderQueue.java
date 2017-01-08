@@ -74,7 +74,11 @@ public class BatchRenderQueue {
 	 * @return
 	 */
 	public <T extends BatchRenderItem> T obtainItem(Class<T> itemClass) {
-		return (T)itemPools.get(itemClass).obtain();
+		Pool<BatchRenderItem> batchRenderItemPool = itemPools.get(itemClass);
+		if (batchRenderItemPool == null) {
+			throw new RuntimeException("item class [" + itemClass + "] not defined");
+		}
+		return (T)batchRenderItemPool.obtain();
 	}
 
 	/**
