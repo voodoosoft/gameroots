@@ -110,7 +110,11 @@ public class BatchRenderQueue {
 	 * @param time current time in ns
 	 */
 	public void render(SpriteBatch batch, long time) {
-		for (int i = 0; i < maxLayers; i++) {
+		render(batch, time, 0, maxLayers);
+	}
+
+	public void render(SpriteBatch batch, long time, int fromLayer, int toLayer) {
+		for (int i = fromLayer; i < maxLayers && i <= toLayer; i++) {
 			int itemCount = this.itemCount[i];
 			if (itemCount > 0) {
 				BatchRenderItem[] items = itemLayers.get(i);
@@ -123,13 +127,17 @@ public class BatchRenderQueue {
 		}
 	}
 
+	public void reset() {
+		reset(0, maxLayers);
+	}
+
 	/**
 	 * Resets this render queue.
 	 * <p/>Typically called after or before rendering batches with <code>render</code>.
 	 * <br/>Frees all pooled batch items.
 	 */
-	public void reset() {
-		for (int i = 0; i < maxLayers; i++) {
+	public void reset(int fromLayer, int toLayer) {
+		for (int i = fromLayer; i < maxLayers && i <= toLayer; i++) {
 			BatchRenderItem[] items = itemLayers.get(i);
 			int itemCount = this.itemCount[i];
 			for (int j = 0; j < itemCount; j++) {
