@@ -1,5 +1,5 @@
 ##A sample application showing how to use color grading in LibGdx.
-Written by [cypherdare](https://github.com/cypherdare) for the game [Lethal Running](http:/www.lethalrunning.com)
+Written by [cypherdare](https://github.com/cypherdare) for the game [Lethal Running](http:/www.lethalrunning.com).
 
 This is a standard LibGDX project you can import normally from the `build.gradle`. 
 When you run the DesktopLauncher:
