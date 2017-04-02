@@ -65,6 +65,14 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		return y;
 	}
 
+	public float getWidth() {
+		return width;
+	}
+
+	public float getHeight() {
+		return height;
+	}
+
 	public void setDimension(float width, float height) {
 		this.width = width;
 		this.height = height;
