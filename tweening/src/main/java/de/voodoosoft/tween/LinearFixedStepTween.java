@@ -11,6 +11,7 @@ public class LinearFixedStepTween extends AbstractTween {
 
 		this.updateInterval = updateInterval;
 		this.startValue = startValue;
+		this.value = startValue;
 		this.endValue = endValue;
 		this.valueDelta = valueDelta;
 		active = true;
