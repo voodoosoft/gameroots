@@ -15,7 +15,7 @@ public class InterpolationFixedStepTween extends AbstractTween {
 
 		this.interpolation = interpolation;
 		this.updateInterval = updateInterval;
-		this.value = Float.NaN;
+		this.value = startValue;
 		this.inputVal = startValue;
 		this.startValue = startValue;
 		this.endValue = endValue;
@@ -60,7 +60,7 @@ public class InterpolationFixedStepTween extends AbstractTween {
 	public void reset() {
 		lastUpdateTime = 0;
 		inputVal  = startValue;
-		value = Float.NaN;
+		value = startValue;
 		updated = false;
 		ticked = false;
 		done = false;
