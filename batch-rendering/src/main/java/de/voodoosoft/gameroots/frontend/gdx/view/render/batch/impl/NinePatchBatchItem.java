@@ -1,8 +1,8 @@
 package de.voodoosoft.gameroots.frontend.gdx.view.render.batch.impl;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Pool;
 import de.voodoosoft.gameroots.frontend.gdx.view.render.batch.BatchRenderItem;
 import de.voodoosoft.gameroots.frontend.gdx.view.render.batch.BlendMode;
@@ -10,11 +10,11 @@ import de.voodoosoft.gameroots.frontend.gdx.view.render.batch.BlendMode;
 
 
 /**
- * Batch item for rendering textures.
+ * Batch item for rendering nine patches.
  */
-public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable {
+public class NinePatchBatchItem extends AbstractBatchItem implements Pool.Poolable {
 
-	public TextureBatchItem() {
+	public NinePatchBatchItem() {
 		width = -1;
 		height = -1;
 		rotation = 0;
@@ -23,7 +23,7 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		setBlendMode(DefaultBlendMode.DEFAULT);
 	}
 
-	public TextureBatchItem(int layer) {
+	public NinePatchBatchItem(int layer) {
 		super(layer);
 		width = -1;
 		height = -1;
@@ -38,7 +38,7 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 	 */
 	@Override
 	public void reset() {
-		textureRegion = null;
+		ninePatch = null;
 		color = null;
 		width = -1;
 		height = -1;
@@ -88,12 +88,8 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 		this.rotation = rotation;
 	}
 
-	public void setTextureRegion(TextureRegion textureRegion) {
-		this.textureRegion = textureRegion;
-	}
-
-	public TextureRegion getTextureRegion() {
-		return textureRegion;
+	public void setNinePatch(NinePatch ninePatch) {
+		this.ninePatch = ninePatch;
 	}
 
 	public Color getColor() {
@@ -130,19 +126,19 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 
 		if (rotation != 0) {
 			if (xOrigin != -1 && yOrigin != -1) {
-				batch.draw(textureRegion, x, y, xOrigin, yOrigin, width, height, 1, 1, rotation);
+				ninePatch.draw(batch, x, y, xOrigin, yOrigin, width, height, 1, 1, rotation);
 			} else {
-				float w = width != -1 ? width : textureRegion.getRegionWidth();
-				float h = height != -1 ? height : textureRegion.getRegionHeight();
-				batch.draw(textureRegion, x, y, w / 2f, h / 2f, w, h, 1, 1, rotation);
+				float w = width != -1 ? width : ninePatch.getTotalWidth();
+				float h = height != -1 ? height : ninePatch.getTotalHeight();
+				ninePatch.draw(batch, x, y, w / 2f, h / 2f, w, h, 1, 1, rotation);
 			}
 		}
 		else {
 			if (width == -1 || height == -1) {
-				batch.draw(textureRegion, x, y);
+				ninePatch.draw(batch, x, y, ninePatch.getTotalWidth(), ninePatch.getTotalHeight());
 			}
 			else {
-				batch.draw(textureRegion, x, y, width, height);
+				ninePatch.draw(batch, x, y, width, height);
 			}
 		}
 	}
@@ -151,10 +147,10 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 	public int compareTo(BatchRenderItem otherItem) {
 		int result = super.compareTo(otherItem);
 		if (result == 0) {
-			if (otherItem instanceof TextureBatchItem) {
-				TextureBatchItem o = (TextureBatchItem)otherItem;
-				int thisHandle = this.getTextureRegion().getTexture().getTextureObjectHandle();
-				int otherHandle = o.getTextureRegion().getTexture().getTextureObjectHandle();
+			if (otherItem instanceof NinePatchBatchItem) {
+				NinePatchBatchItem o = (NinePatchBatchItem)otherItem;
+				int thisHandle = this.ninePatch.getTexture().getTextureObjectHandle();
+				int otherHandle = o.ninePatch.getTexture().getTextureObjectHandle();
 				result = Integer.compare(thisHandle, otherHandle);
 			}
 		}
@@ -166,6 +162,6 @@ public class TextureBatchItem extends AbstractBatchItem implements Pool.Poolable
 	private float x, y;
 	private float width, height;
 	private float xOrigin, yOrigin;
-	private TextureRegion textureRegion;
+	private NinePatch ninePatch;
 	private float rotation;
 }
