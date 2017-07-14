@@ -46,6 +46,10 @@ public class SequenceTween implements Tween {
 		activeTweenIdx = 0;
 	}
 
+	public void setActiveTween(int activeTween) {
+		this.activeTweenIdx = activeTween;
+	}
+
 	@Override
 	public void update(long time) {
 		if (!done && activeTweenIdx < tweens.size()) {
