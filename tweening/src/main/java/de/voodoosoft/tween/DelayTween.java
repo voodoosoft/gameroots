@@ -5,6 +5,15 @@ public class DelayTween extends AbstractTween {
 		this.delay = delay;
 	}
 
+	public DelayTween(long delay, float value) {
+		this.delay = delay;
+		this.value = value;
+	}
+
+	public void setValue(float value) {
+		this.value = value;
+	}
+
 	@Override
 	public void reset() {
 		firstUpdate = 0;
@@ -32,19 +41,20 @@ public class DelayTween extends AbstractTween {
 		if (firstUpdate == 0) {
 			firstUpdate = time;
 			updated = true;
-			onStart(time, Float.NaN);
+			onStart(time, value);
 			return;
 		}
 
-		onUpdate(time, Float.NaN);
+		onUpdate(time, value);
 
 		long dt = time - firstUpdate;
 		if (dt >= delay) {
 			done = true;
-			onEnd(time, Float.NaN);
+			onEnd(time, value);
 		}
 	}
 
+	private float value;
 	private boolean done;
 	private boolean updated;
 	private long delay;
