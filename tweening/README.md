@@ -1,13 +1,13 @@
-#Tweening
+# Tweening
 A simple to use basic tween library.
 
-###Features:
+### Features:
 - value interpolation tweens (see LibGdx Interpolation classes)
 - sequences tweens
 - delay tweens
 - callbacks for interaction with tween starts, -progress and -ends
 
-###Examples:
+### Examples:
 Simulating day-night cycles.
 ```
 		long start = timer.getTimeValue();
