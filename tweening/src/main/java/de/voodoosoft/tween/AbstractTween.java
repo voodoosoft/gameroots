@@ -6,15 +6,21 @@ public abstract class AbstractTween implements Tween {
 	}
 
 	protected void onStart(long time, float value) {
-		tweenCallback.onStart(time, value);
+		if (tweenCallback != null) {
+			tweenCallback.onStart(time, value);
+		}
 	}
 
 	protected void onUpdate(long time, float value) {
-		tweenCallback.onUpdate(time, value);
+		if (tweenCallback != null) {
+			tweenCallback.onUpdate(time, value);
+		}
 	}
 
 	protected void onEnd(long time, float value) {
-		tweenCallback.onEnd(time, value);
+		if (tweenCallback != null) {
+			tweenCallback.onEnd(time, value);
+		}
 	}
 
 	private TweenCallback tweenCallback;
