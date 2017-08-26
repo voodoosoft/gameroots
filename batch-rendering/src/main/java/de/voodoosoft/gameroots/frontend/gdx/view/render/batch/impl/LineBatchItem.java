@@ -26,6 +26,13 @@ public class LineBatchItem extends AbstractBatchItem implements Pool.Poolable {
 		this.color = color;
 	}
 
+	public void setLine(float x1, float y1, float x2, float y2) {
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+	}
+
 	@Override
 	public void render(SpriteBatch batch, long time) {
 		if (color != null) {
