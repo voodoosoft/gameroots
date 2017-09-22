@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Pool;
 public class FilledBatchItem extends AbstractBatchItem implements Pool.Poolable {
 	public FilledBatchItem(ShapeRenderer shapeRenderer) {
 		setBlendMode(DefaultBlendMode.DEFAULT);
+		this.shapeRenderer = shapeRenderer;
 	}
 
 	@Override
